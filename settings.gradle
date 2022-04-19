@@ -8,4 +8,4 @@
  */
 
 rootProject.name = 'gamestart'
-include('app', 'list', 'utilities')
+include('app', 'domain', 'utilities')
