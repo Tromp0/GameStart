@@ -11,11 +11,10 @@ import static cat.uvic.teknos.m06.gamestart.app.MessageUtils.getMessage;
 
 import org.apache.commons.text.WordUtils;
 
+import java.sql.DriverManager;
+
 public class App {
     public static void main(String[] args) {
-        LinkedList tokens;
-        tokens = split(getMessage());
-        String result = join(tokens);
-        System.out.println(WordUtils.capitalize(result));
+        DriverManager.getConnection();
     }
 }
