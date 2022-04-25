@@ -12,9 +12,22 @@ import static cat.uvic.teknos.m06.gamestart.app.MessageUtils.getMessage;
 import org.apache.commons.text.WordUtils;
 
 import java.sql.DriverManager;
+import java.sql.SQLException;
 
 public class App {
-    public static void main(String[] args) {
-        DriverManager.getConnection();
+    public static void main(String[] args) throws SQLException {
+        try(var connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/gamestart","root",null)){
+
+            var statement = connection.createStatement();
+
+            var resultSet = statement.executeQuery("select * from consolas");
+
+            while (resultSet.next()){
+                System.out.println("IDConsola:"+ resultSet.getInt("IDConsola")
+                        + ", Nombre: "+ resultSet.getString("Nombre"));
+            }
+
+        }
+
     }
 }
