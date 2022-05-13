@@ -1,4 +1,4 @@
-DROP DATABASE gamestart;
+
 CREATE DATABASE IF NOT EXISTS gamestart;
 
 USE gamestart;

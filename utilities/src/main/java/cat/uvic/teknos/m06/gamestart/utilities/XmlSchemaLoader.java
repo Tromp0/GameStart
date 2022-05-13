@@ -6,7 +6,7 @@ import org.w3c.dom.NodeList;
 import cat.uvic.teknos.m06.gamestart.utilities.xml.schema;
 import org.xml.sax.SAXException;
 import java.io.*;
-import java.nio.charset.StandardCharsets;
+import java.nio.charset.Charset;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import javax.xml.parsers.DocumentBuilder;
@@ -20,8 +20,6 @@ import java.io.IOException;
 public class XmlSchemaLoader implements SchemaLoader {
     private final String schemaPath;
     private final ConnectionProperties connectionProperties;
-    private DocumentBuilderFactory factory;
-    private DocumentBuilder builder;
 
     public XmlSchemaLoader(String schemaPath, ConnectionProperties connectionProperties) {
         this.schemaPath = schemaPath;
@@ -30,14 +28,11 @@ public class XmlSchemaLoader implements SchemaLoader {
 
 
     @Override
-    public void load() throws ParserConfigurationException {
+    public void load() {
         try (var connection = DriverManager.getConnection(
                 connectionProperties.getUrl(), connectionProperties.getUsername(), connectionProperties.getPassword());
-             var statement = connection.createStatement();
-             var inputStream = new BufferedReader(new FileReader(schemaPath, StandardCharsets.UTF_8))
-        )
-
-        {
+             var statement = connection.createStatement()
+        ) {
             File file = new File(schemaPath);
             DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
             DocumentBuilder db = dbf.newDocumentBuilder();
@@ -48,16 +43,15 @@ public class XmlSchemaLoader implements SchemaLoader {
             String version = vList.item(0).getTextContent();
             schema schema = new schema();
             String [] commandList = new String[nList.getLength()];
-            for (int i = 0; i < nList.getLength(); i++) {
-                commandList[i] = nList.item(i).getTextContent();
-            }
+            for (int i = 0; i < nList.getLength(); i++) {commandList[i] = nList.item(i).getTextContent();}
             schema.setCommands(commandList);
             schema.setVersion(version);
-            if (!"1.0.0".equals(schema.getVersion())) {
-                for (int i=0;i<schema.getCommands().length;i++){
-                    statement.executeUpdate(commandList[i]);
+            if ("1.0.0".equals(schema.getVersion())) {
+                for (String line : schema.getCommands()) {
+                    statement.executeUpdate(line);
                 }
             }
+
 
         } catch (SQLException e) {
             throw new SchemaLoaderException("Sql Exception!", e);
@@ -65,7 +59,7 @@ public class XmlSchemaLoader implements SchemaLoader {
             throw new SchemaLoaderException("The file" + schemaPath + " doesn't exist", e);
         } catch (IOException e) {
             throw new SchemaLoaderException("IO Exception", e);
-        } catch (SAXException e) {
+        } catch (SAXException | ParserConfigurationException e) {
             throw new RuntimeException(e);
         }
     }

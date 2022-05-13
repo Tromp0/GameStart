@@ -1,19 +1,18 @@
-package cat.uvic.teknos.m06.bandhub.utilities;
+package cat.uvic.teknos.m06.gamestart.utilities;
 
-import cat.uvic.teknos.m06.gamestart.utilities.ConnectionProperties;
-import cat.uvic.teknos.m06.gamestart.utilities.XmlSchemaLoader;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 
-public class XmlSchemaLoaderTest  {
+class SingleLineCommandSchemaLoaderTest {
 
     @Test
     void load() {
         var connectionProperties = new ConnectionProperties();
         connectionProperties.setUrl("jdbc:mysql://localhost:3306/");
         connectionProperties.setUsername("root");
-        var schemaLoader = new XmlSchemaLoader("utilities/src/test/resources/schema.xml", connectionProperties);
+
+        var schemaLoader = new SingleLineCommandSchemaLoader("src/test/resources/singleLineSchema.txt", connectionProperties);
 
         assertDoesNotThrow(() -> {
             schemaLoader.load();
