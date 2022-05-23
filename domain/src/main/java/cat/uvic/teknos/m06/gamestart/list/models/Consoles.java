@@ -1,7 +1,6 @@
 package cat.uvic.teknos.m06.gamestart.list.models;
 
 public class Consoles {
-    /*ConsoleId INT(5) PRIMARY KEY, Name VARCHAR(20)*/
     private int ConsoleId;
     private String Name;
 

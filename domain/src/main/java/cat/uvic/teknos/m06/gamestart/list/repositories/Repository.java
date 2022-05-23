@@ -1,8 +1,14 @@
 package cat.uvic.teknos.m06.gamestart.list.repositories;
 
-public interface Repository<TModel, Key> {
-    void save(TModel model );
-    void delete(TModel model);
-    TModel getById(Key id);
-    List<TModel> getAll();
+import cat.uvic.teknos.m06.gamestart.list.models.Members;
+import cat.uvic.teknos.m06.gamestart.list.models.Products;
+
+import java.util.List;
+
+public interface Repository<T, K> {
+    void save(T model );
+    void delete(T model);
+    T getById(K id);
+
+    List<T> getAll();
 }
