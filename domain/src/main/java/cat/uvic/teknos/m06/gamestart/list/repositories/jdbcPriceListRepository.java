@@ -11,8 +11,8 @@ import java.util.List;
 
 public class jdbcPriceListRepository implements Repository<PriceList, Integer>{
     private static final String INSERT = "insert into pricelist (price) values (?)";
-    private static final String UPDATE = "update pricelist set name = ? where priceid = ?";
-    private static final String SELECT_ALL = "select priceid, name from pricelist";
+    private static final String UPDATE = "update pricelist set price = ? where priceid = ?";
+    private static final String SELECT_ALL = "select priceid, price from pricelist";
     private static final String DELETE = "delete from pricelist where priceid = ?";
     private final Connection connection;
     public jdbcPriceListRepository(Connection connection) {

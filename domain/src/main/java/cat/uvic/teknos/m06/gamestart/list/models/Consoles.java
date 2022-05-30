@@ -1,6 +1,9 @@
 package cat.uvic.teknos.m06.gamestart.list.models;
 
+/* @Entity */
 public class Consoles {
+    /* @id */
+    /* @GeneratedValue */
     private int ConsoleId;
     private String Name;
 

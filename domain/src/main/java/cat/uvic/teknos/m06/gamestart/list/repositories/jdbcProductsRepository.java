@@ -10,8 +10,8 @@ import java.util.List;
 
 public class jdbcProductsRepository implements Repository<Products, Integer>{
     private static final String INSERT = "insert into products (name,) values (?)";
-    private static final String UPDATE = "update products set name = ? where id = ?";
-    private static final String SELECT_ALL = "select id, name from products";
+    private static final String UPDATE = "update products set name = ? where productid = ?";
+    private static final String SELECT_ALL = "select productid, name from products";
     private static final String DELETE = "delete from products where productid = ?";
     private final Connection connection;
     public jdbcProductsRepository(Connection connection) {
@@ -73,13 +73,13 @@ public class jdbcProductsRepository implements Repository<Products, Integer>{
             var resultSet = prepareStatement.executeQuery();
 
             if (resultSet.next()) {
-                priceList = new PriceList();
+                products = new Products();
 
-                priceList.setPriceId(resultSet.getInt("priceid"));
-                priceList.setPrice(resultSet.getFloat("price"));
+                products.setProductId(resultSet.getInt("productid"));
+                products.setName(resultSet.getString("name"));
             }
 
-            return priceList;
+            return products;
         } catch (SQLException ex) {
             throw new RepositoryException("Exception while excecuting get all");
         }

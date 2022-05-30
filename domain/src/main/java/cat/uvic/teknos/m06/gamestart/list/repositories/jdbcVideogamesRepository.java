@@ -12,7 +12,7 @@ import java.util.List;
 public class jdbcVideogamesRepository implements Repository<Videogames, Integer>{
     private static final String INSERT = "insert into videogames (title) values (?)";
     private static final String UPDATE = "update videogames set title = ? where gameid = ?";
-    private static final String SELECT_ALL = "select gameid, name from videogames";
+    private static final String SELECT_ALL = "select gameid, title from videogames";
     private static final String DELETE = "delete from videogames where gameid = ?";
     private final Connection connection;
     public jdbcVideogamesRepository(Connection connection) {
@@ -65,8 +65,26 @@ public class jdbcVideogamesRepository implements Repository<Videogames, Integer>
         }
     }
     @Override
-    public Videogames getById(Integer id) {
-        return null;
+    public Videogames getById(Integer id){
+        Videogames videogames = null;
+
+        try (var prepareStatement = connection.prepareStatement(SELECT_ALL + "where priceid = ?")) {
+            prepareStatement.setInt(1, id);
+
+            var resultSet = prepareStatement.executeQuery();
+
+            if (resultSet.next()) {
+                videogames = new Videogames();
+
+                videogames.setGameId(resultSet.getInt("gameid"));
+                videogames.setTitle(resultSet.getString("title"));
+            }
+
+            return videogames;
+        } catch (SQLException ex) {
+            throw new RepositoryException("Exception while excecuting get all");
+        }
+
     }
     @Override
     public List<Videogames> getAll() {

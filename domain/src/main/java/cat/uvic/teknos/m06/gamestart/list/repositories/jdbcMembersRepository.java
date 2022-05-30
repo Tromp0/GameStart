@@ -8,9 +8,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class jdbcMembersRepository implements Repository<Members, String>{
-    private static final String INSERT = "insert into members (name) values (?)";
-    private static final String UPDATE = "update members set name = ? where DNI = ?";
-    private static final String SELECT_ALL = "select DNI, name from members";
+    private static final String INSERT = "insert into members (dni,name,mail,phonenumber) values (?,?,?,?)";
+    private static final String UPDATE = "update members set name = ? , mail = ? , phonenumber = ? where DNI = ?";
+    private static final String SELECT_ALL = "select * from members";
     private static final String DELETE = "delete from members where DNI = ?";
     private final Connection connection;
     public jdbcMembersRepository(Connection connection) {
@@ -29,7 +29,7 @@ public class jdbcMembersRepository implements Repository<Members, String>{
         }
     }
 
-    private void update(Members members) {
+    public void update(Members members) {
         try (var preparedStatement = connection.prepareStatement(UPDATE)) {
             preparedStatement.setString(1, members.getName());
             preparedStatement.setString(1, members.getDNI());
@@ -42,13 +42,12 @@ public class jdbcMembersRepository implements Repository<Members, String>{
 
     private void insert(Members members) {
         try (var preparedStatement = connection.prepareStatement(INSERT)) {
-            preparedStatement.setString(1, members.getName());
+            preparedStatement.setString(1, members.getDNI());
+            preparedStatement.setString(2, members.getName());
+            preparedStatement.setString(3, members.getMail());
+            preparedStatement.setString(4, members.getPhoneNumber());
             preparedStatement.executeUpdate();
             var generatedKeysResultSet = preparedStatement.getGeneratedKeys();
-            if (!generatedKeysResultSet.next()) {
-                throw new RepositoryException("Exception while inserting: id not generated" + members);
-            }
-            members.setDNI(generatedKeysResultSet.getString(1));
         } catch (SQLException e) {
             throw new RepositoryException("Exception while inserting: " + members, e);
         }

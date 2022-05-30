@@ -5,3 +5,9 @@
 plugins {
     id 'cat.uvic.teknos.m06.gamestart.java-library-conventions'
 }
+
+dependencies {
+    implementation 'org.testng:testng:7.1.0'
+    implementation group: 'mysql', name: 'mysql-connector-java', version: '8.0.28'
+    implementation group: 'javax.persistence', name: 'javax.persistence-api', version: '2.2'
+}

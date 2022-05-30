@@ -4,13 +4,14 @@ import cat.uvic.teknos.m06.gamestart.list.models.Consoles;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
 public class jdbcConsolesRepository implements Repository<Consoles, Integer> {
     private static final String INSERT = "insert into consoles (name) values (?)";
-    private static final String UPDATE = "update consoles set name = ? where consoleid = ?";
-    private static final String SELECT_ALL = "select consoleid, name from consoles";
+    private static final String UPDATE = "update consoles set name = ? where consoleid = (?)";
+    private static final String SELECT_ALL = "select * from consoles";
     private static final String DELETE = "delete from consoles where consoleid = ?";
     private final Connection connection;
 
@@ -33,7 +34,7 @@ public class jdbcConsolesRepository implements Repository<Consoles, Integer> {
     private void update(Consoles consoles) {
         try (var preparedStatement = connection.prepareStatement(UPDATE)) {
             preparedStatement.setString(1, consoles.getName());
-            preparedStatement.setInt(1, consoles.getConsoleId());
+            preparedStatement.setInt(2, consoles.getConsoleId());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             throw new RepositoryException("Exception while inserting: " + consoles, e);
@@ -41,11 +42,11 @@ public class jdbcConsolesRepository implements Repository<Consoles, Integer> {
 
     }
 
-    private void insert(Consoles consoles) {
-        try (var preparedStatement = connection.prepareStatement(INSERT)) {
-            preparedStatement.setString(1, consoles.getName());
-            preparedStatement.executeUpdate();
-            var generatedKeysResultSet = preparedStatement.getGeneratedKeys();
+    private void insert(Consoles consoles){
+        try(var prepared = connection.prepareStatement(INSERT, Statement.RETURN_GENERATED_KEYS)){
+            prepared.setString(1, consoles.getName());
+            prepared.executeUpdate();
+            var generatedKeysResultSet = prepared.getGeneratedKeys();
             if (!generatedKeysResultSet.next()) {
                 throw new RepositoryException("Exception while inserting: id not generated" + consoles);
             }
@@ -68,7 +69,7 @@ public class jdbcConsolesRepository implements Repository<Consoles, Integer> {
     public Consoles getById(Integer id) {
         Consoles console = null;
 
-        try (var prepareStatement = connection.prepareStatement(SELECT_ALL + "where consoleid = ?")) {
+        try (var prepareStatement = connection.prepareStatement(SELECT_ALL + " where consoleid = ?")) {
             prepareStatement.setInt(1, id);
 
             var resultSet = prepareStatement.executeQuery();
@@ -76,13 +77,13 @@ public class jdbcConsolesRepository implements Repository<Consoles, Integer> {
             if (resultSet.next()) {
                 console = new Consoles();
 
-                console.setConsoleId(resultSet.getInt("consoleid"));
+                console.setConsoleId(resultSet.getInt("ConsoleId"));
                 console.setName(resultSet.getString("name"));
             }
 
             return console;
         } catch (SQLException ex) {
-            throw new RepositoryException("Exception while excecuting get all");
+            throw new RepositoryException("Exception while excecuting get by id");
         }
 
     }
