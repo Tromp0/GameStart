@@ -57,7 +57,7 @@ public class JPAConsolesTest {
     @Test
     void getById() {
         var ConsolesRepository = new JpaConsolesRepository(entityManagerFactory);
-        var console = ConsolesRepository.getById(7);
+        var console = ConsolesRepository.getById(1);
         assertNotNull(console);
     }
 

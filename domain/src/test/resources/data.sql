@@ -1,0 +1,1 @@
+insert into Consoles (name) values ('PS5'), ('PS4'), ('Nintendo Switch');
