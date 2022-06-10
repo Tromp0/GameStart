@@ -1,5 +1,5 @@
-package cat.uvic.teknos.m06.gamestart.list.repositories;
-
+package cat.uvic.teknos.m06.gamestart.domain.repositories;
+/*
 import cat.uvic.teknos.m06.gamestart.list.models.PriceList;
 import cat.uvic.teknos.m06.gamestart.list.models.Products;
 
@@ -104,3 +104,4 @@ public class jdbcProductsRepository implements Repository<Products, Integer>{
         }
     }
 }
+*/

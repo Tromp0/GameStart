@@ -1,4 +1,4 @@
-package cat.uvic.teknos.m06.gamestart.list.models;
+package cat.uvic.teknos.m06.gamestart.domain.models;
 
 public class Members {
     private String DNI;

@@ -1,5 +1,5 @@
-package cat.uvic.teknos.m06.gamestart.list.repositories;
-
+package cat.uvic.teknos.m06.gamestart.domain.repositories;
+/*
 import cat.uvic.teknos.m06.gamestart.list.models.Consoles;
 
 import java.sql.Connection;
@@ -105,4 +105,4 @@ public class jdbcConsolesRepository implements Repository<Consoles, Integer> {
             throw new RepositoryException("Exception while executing get all");
         }
     }
-}
+}*/

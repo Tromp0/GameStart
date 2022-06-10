@@ -1,4 +1,4 @@
-package cat.uvic.teknos.m06.gamestart.list.repositories;
+package cat.uvic.teknos.m06.gamestart.domain.repositories;
 
 public class RepositoryException extends RuntimeException {
     public RepositoryException() {

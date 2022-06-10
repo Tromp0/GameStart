@@ -1,14 +1,13 @@
-package cat.uvic.teknos.m06.gamestart.list;
-import cat.uvic.teknos.m06.gamestart.list.models.Consoles;
-import cat.uvic.teknos.m06.gamestart.list.repositories.jdbcConsolesRepository;
-import com.mysql.cj.jdbc.JdbcConnection;
+package cat.uvic.teknos.m06.gamestart.domain;/*
+import cat.uvic.teknos.m06.gamestart.domain.models.Consoles;
+import cat.uvic.teknos.m06.gamestart.domain.repositories.jdbcConsolesRepository;
 import org.junit.jupiter.api.Test;
 
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.List;
 
-class JDBCMemberTest {
+class JDBCConsolesTest {
 
     @Test
     void save() throws SQLException {
@@ -34,7 +33,7 @@ class JDBCMemberTest {
         var connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/gamestart", "root", null);
         var jdbcConsolesRepository = new jdbcConsolesRepository(connection);
         Consoles console = new Consoles();
-        console.setConsoleId(2);
+        console.setConsoleId(1);
         jdbcConsolesRepository.delete(console);
 
     }
@@ -56,3 +55,4 @@ class JDBCMemberTest {
 }
 
 
+*/

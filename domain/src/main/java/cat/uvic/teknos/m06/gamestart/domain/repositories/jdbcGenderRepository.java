@@ -1,5 +1,5 @@
-package cat.uvic.teknos.m06.gamestart.list.repositories;
-
+package cat.uvic.teknos.m06.gamestart.domain.repositories;
+/*
 import cat.uvic.teknos.m06.gamestart.list.models.Consoles;
 import cat.uvic.teknos.m06.gamestart.list.models.Gender;
 
@@ -104,4 +104,4 @@ public class jdbcGenderRepository implements Repository<Gender, Integer>{
             throw new RepositoryException("Exception while executing get all");
         }
     }
-}
+}*/

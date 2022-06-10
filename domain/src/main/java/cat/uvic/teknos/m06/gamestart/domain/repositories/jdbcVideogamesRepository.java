@@ -1,5 +1,5 @@
-package cat.uvic.teknos.m06.gamestart.list.repositories;
-
+package cat.uvic.teknos.m06.gamestart.domain.repositories;
+/*
 import cat.uvic.teknos.m06.gamestart.list.models.Members;
 import cat.uvic.teknos.m06.gamestart.list.models.Products;
 import cat.uvic.teknos.m06.gamestart.list.models.Videogames;
@@ -103,4 +103,4 @@ public class jdbcVideogamesRepository implements Repository<Videogames, Integer>
             throw new RepositoryException("Exception while executing get all");
         }
     }
-}
+}*/

@@ -1,12 +1,5 @@
-package cat.uvic.teknos.m06.gamestart.list.repositories;
-import cat.uvic.teknos.m06.gamestart.list.models.Gender;
-import cat.uvic.teknos.m06.gamestart.list.models.Members;
-
-import java.sql.Connection;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
-
+package cat.uvic.teknos.m06.gamestart.domain.repositories;
+/*
 public class jdbcMembersRepository implements Repository<Members, String>{
     private static final String INSERT = "insert into members (dni,name,mail,phonenumber) values (?,?,?,?)";
     private static final String UPDATE = "update members set name = ? , mail = ? , phonenumber = ? where DNI = ?";
@@ -102,3 +95,4 @@ public class jdbcMembersRepository implements Repository<Members, String>{
         }
     }
 }
+*/

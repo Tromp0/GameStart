@@ -1,14 +1,6 @@
-package cat.uvic.teknos.m06.gamestart.list.repositories;
+package cat.uvic.teknos.m06.gamestart.domain.repositories;
 
-import cat.uvic.teknos.m06.gamestart.list.models.Members;
-import cat.uvic.teknos.m06.gamestart.list.models.PriceList;
-import cat.uvic.teknos.m06.gamestart.list.models.Products;
-
-import java.sql.Connection;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
-
+/*
 public class jdbcPriceListRepository implements Repository<PriceList, Integer>{
     private static final String INSERT = "insert into pricelist (price) values (?)";
     private static final String UPDATE = "update pricelist set price = ? where priceid = ?";
@@ -106,3 +98,4 @@ public class jdbcPriceListRepository implements Repository<PriceList, Integer>{
         }
     }
 }
+*/

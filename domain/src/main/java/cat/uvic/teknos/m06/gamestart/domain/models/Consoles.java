@@ -1,11 +1,13 @@
-package cat.uvic.teknos.m06.gamestart.list.models;
-
-/* @Entity */
+package cat.uvic.teknos.m06.gamestart.domain.models;
+import javax.persistence.*;
+@Entity
 public class Consoles {
-    /* @id */
-    /* @GeneratedValue */
+
+    @Id
+    @GeneratedValue
     private int ConsoleId;
     private String Name;
+
 
     public int getConsoleId() {return ConsoleId;}
 
@@ -14,4 +16,5 @@ public class Consoles {
     public String getName() {return Name;}
 
     public void setName(String name) {Name = name;}
+
 }
