@@ -19,10 +19,8 @@ public class JPAConsolesTest {
     void saveInsert() {
         var ConsolesRepository = new JpaConsolesRepository(entityManagerFactory);
         var console = new Consoles();
-        console.setName("PS5");
-        assertDoesNotThrow(() -> {
-            ConsolesRepository.save(console);
-        });
+        console.setName("Nintendo Switch");
+        assertDoesNotThrow(() -> ConsolesRepository.save(console));
         assertTrue((console.getConsoleId() != 0));
     }
 
@@ -31,27 +29,27 @@ public class JPAConsolesTest {
         var ConsolesRepository = new JpaConsolesRepository(entityManagerFactory);
         var console = new Consoles();
         console.setName("Xbox Series X");
-        assertDoesNotThrow(() -> {
-            ConsolesRepository.save(console);
-        });
+        assertDoesNotThrow(() -> ConsolesRepository.save(console));
         var entityManager = entityManagerFactory.createEntityManager();
-        var modifiCountry = entityManager.find(Consoles.class, 7);
+        var modifiCountry = entityManager.find(Consoles.class, 1);
         assertEquals("PS5", modifiCountry.getName());
         entityManager.close();
     }
 
     @Test
-    void delete() { /*
+    void delete() {
         var ConsolesRepository = new JpaConsolesRepository(entityManagerFactory);
         var entityManager = entityManagerFactory.createEntityManager();
         var entityManager1 = entityManagerFactory.createEntityManager();
-        var con = entityManager.find(Consoles.class, 7);
+        var con = entityManager.find(Consoles.class, 2);
         assertNotNull(con);
+        Consoles console = new Consoles();
+        console.setConsoleId(2);
         assertDoesNotThrow(() -> {
-            ConsolesRepository.delete(7);
+            ConsolesRepository.delete(console);
         });
         con = entityManager1.find(Consoles.class, 7);
-        assertNull(con);*/
+        assertNull(con);
     }
 
     @Test

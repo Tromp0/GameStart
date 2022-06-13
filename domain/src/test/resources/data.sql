@@ -1,1 +1,1 @@
-insert into Consoles (name) values ('PS5'), ('PS4'), ('Nintendo Switch');
+insert into Consoles (name) values ('Xbox Series X'), ('PS4');

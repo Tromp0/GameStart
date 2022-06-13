@@ -1,4 +1,4 @@
-package cat.uvic.teknos.m06.gamestart.domain;/*
+package cat.uvic.teknos.m06.gamestart.domain;
 import cat.uvic.teknos.m06.gamestart.domain.models.Consoles;
 import cat.uvic.teknos.m06.gamestart.domain.repositories.jdbcConsolesRepository;
 import org.junit.jupiter.api.Test;
@@ -55,4 +55,3 @@ class JDBCConsolesTest {
 }
 
 
-*/
